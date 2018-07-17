@@ -1,0 +1,115 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use FOS\UserBundle\Model\User as BaseUser;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ */
+class User extends BaseUser
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+//    public function __construct()
+//    {
+//        parrent::__construct();
+//    }
+
+    /**
+     * @var
+     * @ORM\OneToMany(targetEntity="Comment",mappedBy="user")
+     */
+    private $comments;
+
+//
+//    /**
+//     * @return mixed
+//     */
+//    public function getComments()
+//    {
+//        return $this->comments;
+//    }
+
+//     * @return mixed
+//     */
+//    public function getEmail()
+//    {
+//        return $this->email;
+//    }
+
+//    /**
+//     * @return mixed
+//     */
+//    public function getUsername()
+//    {
+//        return $this->username;
+//    }
+
+
+
+//    /**
+//     * @return mixed
+//     */
+//    public function getPassword()
+//    {
+//        return $this->password;
+//    }
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Add comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     *
+     * @return User
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comment
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+}

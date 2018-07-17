@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+    <h1><span>Witaj na blogu !</span> </h1>
+
+    {% for post in posts  %}
+        <div>
+            <h2><a href='{{ path('post_show',{'id':post.id}) }}'>{{ post.title }}</a></h2>
+            <p>{{ post.lead}}</p>
+        </div>
+    {% endfor %}
+
+<div class="navigation">
+    {{ knp_pagination_render(posts) }}
+</div>
+
+
+{% endblock %}
